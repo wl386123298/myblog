@@ -1,0 +1,6 @@
+$def with(data)
+        $for i in data
+          <ul>
+              <li><a href="$i.id"> $i.title</a>&nbsp;&nbsp;$i.new_date&nbsp;&nbsp;[<a href="/$i.id/edit">更改</a>|<a href="$i.id/delete">删除</a>] </li>
+          </ul>
+

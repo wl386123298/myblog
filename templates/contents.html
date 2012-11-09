@@ -1,0 +1,23 @@
+$def with(data_1,data_2)
+      $for con in data_1:
+        <meta charset='utf-8'>
+        <div align="center">
+        <div style="width:960px; height: auto;border: 1px solid silver ;text-align: left">
+                <div style="border-bottom: 1px solid silver">$con.title</div>
+                <div style="border-bottom: 1px solid silver">$con.new_date</div>
+                <div style="border-bottom: 1px solid silver;">$con.content</div>
+        $for lm in data_2:
+            <div style="border-bottom: 1px solid silver;">$lm.date | $lm.mcontent</div>
+        </div>
+
+            <div style="border-bottom: 1px solid silver;">
+                <form action="$con.id/leave_message" method="post">
+                    留言：<br/>
+                    <label>
+                        <textarea rows="" cols="" name="lmessage"></textarea>
+                    </label><br/>
+                    <input type="submit" value="提交" style="width: 40px; height: 40px">
+                </form>
+            </div>
+
+        </div>

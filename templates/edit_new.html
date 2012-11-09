@@ -1,0 +1,8 @@
+$def with(data_2)
+        $for i in data_2
+        <form action="/$i.id/update" method="POST">
+            标题：<input type="text" name="new_title" value="$i.title" style="width:300"><p/>
+            作者：<input type="text" name="new_author" value="$i.author"><p/>
+            内容：<p/><textarea name="new_content" style="width: 400; height:500;" >$i.content</textarea><p/>
+            <input type="submit" value="更新">&nbsp;&nbsp;<input type="reset" value="重置">
+        </form>

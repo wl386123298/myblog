@@ -1,0 +1,6 @@
+$def with(data)
+    $for count in data[2]:
+        $if count.username == data[0] and count.password ==int(data[1]):
+            你好,$data[0]!
+        $else:
+            登陆失败！
