@@ -11,11 +11,13 @@ sql ="select *from tb_news order by id"
 urls =('/',"hello",
        '/results','login',
        '/login','login_index',
+       '/about','about',
        '/(\d+)','content',
        '/(\d+)/edit','edit',
        '/(\d+)/update','update',
        '/(\d+)/delete','delete',
        '/(\d+)/leave_message','message',
+
       )
 
 app =web.application(urls,globals())
@@ -30,6 +32,10 @@ class content:
         data_1 =db1.query("select *from tb_news where id="+str(name))
         data_2 =db1.query("select *from news_message where id="+str(name))
         return render.contents(data_1,data_2)
+
+class about:
+    def GET(self):
+        return render.about()
 
 class edit:
     def GET(self,name):
