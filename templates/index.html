@@ -51,28 +51,35 @@ $def with(data)
 <!--内容-->
 $for content in data:
     <div class="container">
-       <div class="mydiv" style="margin-top: 30px">
-           <div class="row">
-           <div class="span2">
-               <h2>$content.new_date</h2>
-           </div>
-           <div class="span10">
-               <h3 class="pager-header">$content.title</h3>
-               <dl class="dl-horizontal">
-                    $if content.content.find(" ")>0:
-                        $content.content.replace(" ","\n")
-                    $else:
-                        <pre style="background-color: white;border: 0px">$content.content</pre>
-               </dl>
-           </div>
+       <!--<div class="mydiv" style="margin-top: 30px">-->
+           <div class="row" style="margin-top: 20px">
+               <div class="span2 mydiv" style="background-color: #19c9f7;height: 140px">
+                 <h2 align="center" style="margin-top: 50px"><font color="white">$content.new_date</font></h2>
+               </div>
+               <div class="span10 mydiv">
+                   <h2 align="center">$content.title</h2>
+                   <hr>
+                   <div><pre style="border: none;background-color: white;">$content.content[0:500] More>>></pre></div>
+               </div>
+           <!--<div class="row">-->
+           <!--<div class="span2">-->
+                   <!--<h4><i class="icon-calendar ">&nbsp;&nbsp;&nbsp;&nbsp;$content.new_date</i></h4>-->
+           <!--</div>-->
+           <!--<div class="span10">-->
+               <!--<h3 class="pager-header">$content.title</h3>-->
+               <!--<dl class="dl-horizontal">-->
+                   <!--<pre style="background-color: white;border: 0px">$content.content</pre>-->
+               <!--</dl>-->
+           <!--</div>-->
+           <!--</div>-->
            </div>
        </div>
-    </div>
+    <!--</div>-->
 
 
 <!--底部-->
 <div class="container">
-    <center><dl>xxx | xxx | xxx</dl></center>
+    <center><dl>Designed by martin|web.py|bae</dl></center>
 </div>
 </body>
 </html>
