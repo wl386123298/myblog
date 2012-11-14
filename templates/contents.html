@@ -1,23 +1,82 @@
-$def with(data_1,data_2)
-      $for con in data_1:
-        <meta charset='utf-8'>
-        <div align="center">
-        <div style="width:960px; height: auto;border: 1px solid silver ;text-align: left">
-                <div style="border-bottom: 1px solid silver">$con.title</div>
-                <div style="border-bottom: 1px solid silver">$con.new_date</div>
-                <div style="border-bottom: 1px solid silver;">$con.content</div>
-        $for lm in data_2:
-            <div style="border-bottom: 1px solid silver;">$lm.date | $lm.mcontent</div>
-        </div>
+$def with(data_1)
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta  charset="utf-8"/>
+<title>My Blog</title>
 
-            <div style="border-bottom: 1px solid silver;">
-                <form action="$con.id/leave_message" method="post">
-                    留言：<br/>
-                    <label>
-                        <textarea rows="" cols="" name="lmessage"></textarea>
-                    </label><br/>
-                    <input type="submit" value="提交" style="width: 40px; height: 40px">
-                </form>
+<!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+<!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+<!-- Le fav and touch icons -->
+
+<link href="../static/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css">
+</head>
+<style type="text/css">
+.mydiv {
+ filter:progid:DXImageTransform.Microsoft.Shadow(color=#909090, direction=120, strength=2);/*ie*/
+	-moz-box-shadow: 1px 1px 5px #909090;/*firefox*/
+	-webkit-box-shadow: 1px 1px 5px #909090;/*safari或chrome*/
+	box-shadow:1px 1px 5px #909090;/*opera或ie9*/
+	background-color: white;
+}
+</style>
+
+<body style="background-image: url('../static/img/bg_1.png')" >
+<!--导航条-->
+<div class="navbar navbar-fixed-top">
+  <div class="navbar-inner">
+    <div class="container"> <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </a> <a class="brand" href="/">我的小站</a>
+      <div class="nav-collapse collapse">
+        <ul class="nav">
+          <li > <a href="/about" >关于我</a></li>
+          <li > <a href="#">标签</a> </li>
+          <li > <a href="#">月份归档</a> </li>
+          <li > <a href="#">友情链接</a> </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class="mydiv" style="margin-top: 40px"> </div>
+</div>
+<!--内容-->
+$for content in data_1:
+    <div class="container">
+      <div class="row" style="margin-top: 20px">
+        <div class="span2 mydiv" style="background-color: #19c9f7;height: 40px;position: fixed;">
+            <h2 align="center"><font color="white">$content.new_date</font></h2>
+        </div>
+        <div class="span10 mydiv" style="margin-left: 180px">
+          <div style="width:90%;margin-left: 30px">
+            <h2 align="center">$content.title</h2>
+            <hr>
+            <div>
+              <pre style="border: none;background-color: white;">$content.content</pre>
+                <div style="margin-bottom: 5px">
+                    <span class="label"><i class="icon-tag">&nbsp;</i>TAG</span> $content.tag_name
+                </div>
+                <!-- UY BEGIN -->
+                <div id="uyan_frame"></div>
+                <script type="text/javascript" id="UYScript" src="http://v1.uyan.cc/js/iframe.js?UYUserId=1708532" async=""></script>
+                <!-- UY END -->
             </div>
-
+          </div>
         </div>
+      </div>
+
+    </div>
+
+<!--底部-->
+<div class="container">
+  <center>
+    <dl>
+      Designed by martin|web.py|bae
+    </dl>
+  </center>
+</div>
+</body>
+</html>
