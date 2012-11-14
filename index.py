@@ -6,7 +6,7 @@ import datetime
 render =web.template.render('templates/')
 
 db1 =web.database(dbn='mysql',db='news',user='root',pw='root')
-sql ="select *from tb_news order by id"
+sql ="select *from tb_news order by new_date desc"
 
 urls =('/',"hello",
        '/results','login',
@@ -30,8 +30,8 @@ class hello:
 class content:
     def GET(self,name):
         data_1 =db1.query("select *from tb_news where id="+str(name))
-        data_2 =db1.query("select *from news_message where id="+str(name))
-        return render.contents(data_1,data_2)
+        #data_2 =db1.query("select *from news_message where id="+str(name))
+        return render.contents(data_1)
 
 class about:
     def GET(self):
@@ -59,10 +59,11 @@ class update:
         t =get_data.new_title
         a =get_data.new_author
         c =get_data.new_content
+        t =get_data.tag
         if get_data.new_title ==''or get_data.new_author=='' or get_data.new_content =='':
             raise  web.seeother('/error')
         else:
-            result =db1.update('tb_news',where='id='+str(name),title=t,author=a,new_date=datetime.datetime.now(),content =c)
+            result =db1.update('tb_news',where='id='+str(name),title=t,author=a,new_date=datetime.datetime.now(),content =c,tag_name =t)
             return  render.update_data(result)
 
 class delete:

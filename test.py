@@ -27,10 +27,11 @@ class commit:
         t =i.title
         a =i.author
         c =i.content
+        ta =i.tag
         if i =='' or a =='' or c =='':
             raise  web.seeother('/error')
         else:
-            result =db.insert('tb_news',title =t,author=a,new_date=datetime.datetime.now(),content =c)
+            result =db.insert('tb_news',title =t,author=a,new_date=datetime.datetime.now(),content =c,tag_name =ta)
             return render.commit(result)
 class error:
     def GET(self):
