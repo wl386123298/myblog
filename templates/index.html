@@ -1,4 +1,4 @@
-$def with(data)
+$def with(data_1,data,pages)
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -26,42 +26,92 @@ $def with(data)
 </style>
 
 
-<body style="background-image: url('../static/img/bg_1.png')">
-<!--导航条-->
-<div class="navbar navbar-fixed-top">
-  <div class="navbar-inner">
-    <div class="container"> <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </a> <a class="brand" href="#">我的小站</a>
-      <div class="nav-collapse collapse">
-        <ul class="nav">
-          <li > <a href="/about" >关于我</a></li>
-          <li > <a href="#">标签</a> </li>
-          <li > <a href="#">月份归档</a> </li>
-          <li > <a href="#">友情链接</a> </li>
-        </ul>
+<body style="background-image: url('../static/img/bg_3.png')">
+<!--导航条开始-->
+<div class="navbar navbar-inverse navbar-fixed-top" >
+    <div class="navbar-inner">
+        <div class="container">
+            <a class="btn btn-navbar" data-toggle="collapse" data-target=".subnav-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </a>
+            <a class="brand" href="#">我的博客</a>
+            <div class="nav-collapse subnav-collapse">
+                <ul class="nav">
+                    <li>
+                        <a href="/about">关于我</a>
+                    </li>
+                    <li>
+                        <a href="#">标签</a>
+                    </li>
 
-      </div>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            月份归档
+                            <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            $for date in data_1:
+                                <li class="">
+                                    <a href="/$date.id">$date.new_date</a>
+                                </li>
+                                <li class="divider"></li>
+                        </ul>
+                    </li>
+                </ul>
+                <ul class="nav pull-right">
+                    <li>
+                        <a href="#">Link</a>
+                    </li>
+                    <li class="divider-vertical"></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            Dropdown
+                            <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="#">Action</a>
+                            </li>
+                            <li>
+                                <a href="#">Another action</a>
+                            </li>
+                            <li>
+                                <a href="#">Something else here</a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a href="#">Separated link</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.nav-collapse -->
+        </div>
     </div>
-  </div>
+    <!-- /navbar-inner -->
 </div>
+<!--导航条结束-->
 
 <div class="container">
     <div class="mydiv" style="margin-top: 40px">
     </div>
 </div>
-<!--内容-->
+<!--内容开始-->
 $for content in data:
     <div class="container">
-       <!--<div class="mydiv" style="margin-top: 30px">-->
            <div class="row" style="margin-top: 20px">
-               <div class="span2 mydiv" style="background-color: #19c9f7;height: 40px">
-                 <h2 align="center"><font color="white">$content.new_date</font></h2>
+               <div class="span2 mydiv" style="background-color: #19c9f7;height: 30px">
+                 <h3 align="center"><font color="white">$content.new_date</font></h3>
                </div>
                <div class="span10 mydiv">
                		<div style="width:90%;margin-left: 30px">
                    <h2 align="center"><a href="/$content.id">$content.title</a></h2>
                    <hr>
                    <div>
-                        <pre style="border: none;background-color: white;font-size: 13px">$content.content[0:600] ……
+                        <pre style="border: none;background-color: white;font-size: 14px">$content.content[0:600] ……
                         </pre>
                        <div style="margin-bottom: 5px">
                         <span class="label"><i class="icon-tag">&nbsp;</i>TAG</span>  $content.tag_name
@@ -69,25 +119,35 @@ $for content in data:
                    </div>
                </div>
                </div>
-           <!--<div class="row">-->
-           <!--<div class="span2">-->
-                   <!--<h4><i class="icon-calendar ">&nbsp;&nbsp;&nbsp;&nbsp;$content.new_date</i></h4>-->
-           <!--</div>-->
-           <!--<div class="span10">-->
-               <!--<h3 class="pager-header">$content.title</h3>-->
-               <!--<dl class="dl-horizontal">-->
-                   <!--<pre style="background-color: white;border: 0px">$content.content</pre>-->
-               <!--</dl>-->
-           <!--</div>-->
-           <!--</div>-->
+
            </div>
        </div>
-    <!--</div>-->
+<!--分页栏结束-->
 
+<!--分页栏开始-->
+
+<div class="container">
+    <center><dl>
+        <div class="pagination">
+            <ul>
+                $for page in range(1,pages+1):
+                    <li>
+                        <a href="/todo/$page">$page</a>
+                    </li>
+
+            </ul>
+        </div>
+    </dl></center>
+</div>
+<!--分页栏结束-->
 
 <!--底部-->
 <div class="container">
     <center><dl>Designed by martin|web.py|bae</dl></center>
 </div>
+
+<script src="../static/bootstrap/js/jquery.js"></script>
+<script src="../static/bootstrap/js/bootstrap-dropdown.js"></script>
+
 </body>
 </html>

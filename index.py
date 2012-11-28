@@ -1,3 +1,5 @@
+#coding=utf-8
+
 __author__ = 'Administrator'
 
 import  web
@@ -12,6 +14,7 @@ urls =('/',"hello",
        '/results','login',
        '/login','login_index',
        '/about','about',
+       '/todo/(\d+)','NavNumContent',
        '/(\d+)','content',
        '/(\d+)/edit','edit',
        '/(\d+)/update','update',
@@ -22,15 +25,45 @@ urls =('/',"hello",
 
 app =web.application(urls,globals())
 
+#NavNum表示最多显示的数量
+NavNum =3
+
+def page():
+    """
+    分页,pages为分页的数
+    """
+    results = db1.query("SELECT COUNT(*) AS NEWSCOUNT FROM tb_news")
+    news_count = results[0].NEWSCOUNT
+    #print "总条数:",news_count
+
+    if not news_count % NavNum:
+        pages = news_count / NavNum
+
+    else:
+        pages = news_count / NavNum + 1
+
+    #print "分的页数:",pages
+
+    return pages
+
 class hello:
     def GET(self):
         data =db1.query(sql)
-        return render.index(data)
+        data_1 =db1.query(sql)
+        pages =page()
+        return render.index(data_1,data,pages)
+
+class NavNumContent:
+    def GET(self,id):
+        off = (int(id)-1) * NavNum
+        #print "第",id,"页\n-----"
+        re = db1.select('tb_news',order='new_date desc',limit=NavNum,offset=off)
+        pages =page()
+        return render.index_content(re,pages)
 
 class content:
     def GET(self,name):
         data_1 =db1.query("select *from tb_news where id="+str(name))
-        #data_2 =db1.query("select *from news_message where id="+str(name))
         return render.contents(data_1)
 
 class about:
